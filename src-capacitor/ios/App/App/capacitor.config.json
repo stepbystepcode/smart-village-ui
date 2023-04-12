@@ -1,0 +1,7 @@
+{
+  "appId": "xiaohe.affairs",
+  "appName": "智慧农庄",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}

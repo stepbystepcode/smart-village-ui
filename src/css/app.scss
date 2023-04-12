@@ -1,0 +1,24 @@
+// app global css in SCSS form
+
+.q-tab__indicator{
+  display: none;
+}
+
+a{
+  text-decoration: none;
+  color:$primary;
+}
+.router-link-active{
+  text-decoration: none;
+  color:$primary;
+}
+.q-avatar {
+  border-radius: 100px!important;
+}
+.q-carousel__navigation .q-btn {
+  margin: 0 !important;
+  font-size: 6px !important;
+}
+.search input{
+  padding-left: 25px;
+}

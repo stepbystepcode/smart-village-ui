@@ -1,0 +1,12 @@
+{
+  "name": "智慧农庄",
+  "version": "0.0.1",
+  "description": "A Quasar Project",
+  "author": "Li Jing",
+  "private": true,
+  "dependencies": {
+    "@capacitor/android": "^2.5.0",
+    "@capacitor/cli": "^2.0.0",
+    "@capacitor/core": "^2.0.0"
+  }
+}
