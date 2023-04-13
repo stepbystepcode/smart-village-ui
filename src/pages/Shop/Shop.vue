@@ -35,7 +35,7 @@ import { ref, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
 const route = useRoute()
-const { data } = await axios.post(
+const { data } = await axios.get(
   `http://8.130.69.208:8080/api/data/${route.query.type}/`,
   { headers: { Authorization: `Bearer ${localStorage.getItem('auth')}` } }
 );

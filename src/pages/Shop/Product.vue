@@ -24,7 +24,7 @@
           <span>客服</span>
         </div>
       </q-btn>
-      <q-btn class="text-grey " unelevated>
+      <q-btn class="text-grey " @click="favourite()" unelevated>
         <div class="column">
           <q-icon name="star"></q-icon>
           <span>收藏</span>
@@ -41,9 +41,25 @@ import BackBtn from '../../components/BackBtn.vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
 const route = useRoute()
-const response = await axios.post(
-  `http://8.130.69.208:8080/api/data/${route.params.type}/${route.params.id[0]}`,
-  { headers: { Authorization: `Bearer ${localStorage.getItem('auth')}` } }
+const favourite = () => {
+axios.get(
+  `http://8.130.69.208:8080/api/data/${route.params.type}/${route.params.id[0]}?type=favourite`,{
+  headers: {
+    'Content-Type': 'application/json','Authorization': `Bearer ${localStorage.getItem('auth')}`
+  }
+});
+
+}
+let headers = {};
+
+if (localStorage.getItem('auth')) {
+  headers.Authorization = `Bearer ${localStorage.getItem('auth')}`;
+}
+
+const response = await axios.get(
+  `http://8.130.69.208:8080/api/data/${route.params.type}/${route.params.id[0]}`,{
+    headers: headers
+  }
 );
 const product=response.data[0];
 </script>

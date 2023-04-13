@@ -11,8 +11,8 @@
     <div class="column q-ma-lg">
       <q-card class="column">
         <div class="row">
-          <q-btn v-for="i in 3" :key="i" class="q-px-none" style="flex:1" flat>
-            <q-icon :name="btnList2[i - 1]"></q-icon><span>{{ btnListCh2[i - 1] }}</span>
+          <q-btn v-for="i in menu1" :key="i.name" :to="{ name: 'List', query: { type: i.type } }" class="q-px-none" style="flex:1" flat>
+            <q-icon :name="i.icon"></q-icon><span>{{ i.name }}</span>
           </q-btn>
         </div>
         <q-separator />
@@ -32,11 +32,16 @@
 </template>
 <script setup lang="ts">
 //import axios from 'axios';
+import {useRouter} from 'vue-router'
 import {ref} from 'vue'
+const router = useRouter();
+const menu1 = ref([
+  { name: '商品收藏', icon: 'star', type: 'favourite' },
+  { name: '店铺关注', icon: 'house', type: 'shop' },
+  { name: '浏览记录', icon: 'history', type: 'history'},
+]);
 const btnList = ['credit_card', 'local_shipping', 'shopping_cart_checkout', 'sms', 'currency_exchange'];
 const btnListCh = ['待付款', '待发货', '待收货', '待评价', '退款/售后'];
-const btnList2 = ['star', 'house', 'history'];
-const btnListCh2 = ['商品收藏', '店铺关注', '浏览记录'];
 const isLogin=ref(false);
 if (localStorage.getItem('auth')!=null) {
   const tokenParts = localStorage.getItem('auth')!.split('.');

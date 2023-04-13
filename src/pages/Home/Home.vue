@@ -52,12 +52,12 @@ const router = useRouter();
 const search = ref('');
 const $q = useQuasar();
 const menu = ref([
-  { name: '土壤检测', icon: 'sensors', color: '#5C8BD9', to: '/environment/test' },
-  { name: '作物推荐', icon: 'eco', color: '#F2C037', to: '/environment/test' },
+  { name: '土壤检测', icon: 'sensors', color: '#5C8BD9', to: '/home/test' },
+  { name: '作物推荐', icon: 'eco', color: '#F2C037', to: '/home/test' },
   { name: '种子购买', icon: 'shopping_cart', color: '#9C4DCC', to: '/shop?type=seed' },
   { name: '专家咨询', icon: 'person', color: '#E57373', to: '/chat' },
-  { name: '种植技术', icon: 'compost', color: '#66BB6A', to: '/environment/test' },
-  { name: '机械招募', icon: 'settings_suggest', color: '#616161', to: '/environment/test' },
+  { name: '种植技术', icon: 'compost', color: '#66BB6A', to: '/home/test' },
+  { name: '机械招募', icon: 'settings_suggest', color: '#616161', to: '/home/test' },
 ]);
 let pos = reactive<Position>({
   adcode: 0,

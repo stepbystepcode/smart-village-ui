@@ -30,7 +30,7 @@ const routes: RouteRecordRaw[] = [
       },
       { path: '/mail', component: () => import('pages/Affairs/Mail.vue') },
       { path: '/chat', component: () => import('pages/Profile/Chat.vue') },
-      { path: '/item', component: () => import('../components/List.vue') },
+      { path: '/item', component: () => import('../components/List.vue'), name: 'List' },
       {
         path: '/detail/:type/:id',
         component: () => import('pages/Affairs/Detail.vue'),

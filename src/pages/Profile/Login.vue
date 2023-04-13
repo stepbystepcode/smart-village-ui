@@ -43,11 +43,7 @@ const submit = () => {
         icon: 'warning',
         message: '用户名或密码错误'
       })
-      //console.error(error);
     }
   })();
-  //,{
-  //   Headers: {'Authorization': 'Bearer '+localStorage.getItem('auth')}
-  // }
 }
 </script>
