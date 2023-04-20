@@ -16,6 +16,7 @@
     "jsonwebtoken": "^9.0.0",
     "jws": "^4.0.0",
     "quasar": "^2.11.9",
+    "sweetalert2": "^11.7.3",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0",
     "vuex": "^4.0.1"

@@ -18,8 +18,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router'
 import BackBtn from '../../components/BackBtn.vue'
+const router = useRouter();
 const video = ref(null);
 const dialogVisible = ref(false);
 const photoDataUrl = ref(null);
@@ -50,6 +52,7 @@ function closeDialog() {
 function submitPhoto() {
   // Do something with the photo here, such as uploading it to a server
   dialogVisible.value = false;
+  router.push('/home/result');
 }
 </script>
 

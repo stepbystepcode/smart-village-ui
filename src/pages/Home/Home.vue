@@ -1,48 +1,55 @@
 <template>
-  <header>
-    <q-toolbar class="bg-secondary text-white rounded-borders">
-      <q-avatar class="q-ma-sm" size="40px" color="teal" text-color="white" icon="person"
-        @click="router.push('/profile')"></q-avatar>
-      <q-input dark dense standout v-model="search" input-class="text-left">
-        <template v-slot:append>
-          <q-icon v-if="search === ''" name="search" />
-          <q-icon v-else name="clear" class="cursor-pointer" @click="search = ''" />
-        </template>
-      </q-input>
-    </q-toolbar>
-  </header>
-  <div class="column bg">
-    <div class="grid text-white">
-      <div v-for="(a, i) in menu" :key="i" class="q-ma-sm">
-        <q-btn flat :style="`background:${a.color}`" :to="a.to">
-          <template v-slot:default>
-            <div class="text-center flex-center column q-pa-sm">
-              <q-icon :name="a.icon" size="40px"></q-icon>
-              <span>{{ a.name }}</span>
+  <div class="container" >
+    <div class="top-section"></div>
+    <div class="bottom-section">
+      <q-layout view="hHh lpR fFf" v-if="weather.value">
+        <q-header  class="bg-green "
+          style="height: 25%;">
+          <div class="q-pa-lg">
+            <div class="text-h5">上午好</div>
+            <div class="q-mb-sm">欢迎使用智慧农庄</div>
+          </div>
+          <div class="q-pa-sm" style="position: absolute; right: 0; top: 0; bottom: 0;">
+        <q-icon size="xl" class="full-height"  :name="`img:/svg/weather/${weather.value.weather}.svg`"></q-icon>
+          </div>
+          <div class="q-pa-sm">
+            <q-card-section style="display: grid; grid-template-columns: repeat(4, 1fr);">
+              <div class="column flex-center">
+                <q-icon name="folder" size="30px" />
+                <div>Folder 1</div>
+              </div>
+              <div class="column flex-center">
+                <q-icon name="folder" size="30px" />
+                <div>Folder 2</div>
+              </div>
+              <div class="column flex-center">
+                <q-icon name="folder" size="30px" />
+                <div>Folder 3</div>
+              </div>
+              <div class="column flex-center">
+                <q-icon name="folder" size="30px" />
+                <div>Folder 4</div>
+              </div>
+            </q-card-section>
+          </div>
+        </q-header>
+        <q-page-container style="background-color: #4caf50; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+          <q-page class="q-pa-md"
+            style="background-color: rgb(243 243 243); border-top-left-radius: 20px; border-top-right-radius: 20px;">
+            <div class="q-mb-md" style="height: 75%">
+              <q-card-section
+                style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);">
+        <q-btn v-for="(a, i) in menu" :key="i" class="q-pa-md q-ma-sm card" flat :to="a.to">
+          <q-icon :name="`img:/svg/home/${i+1}.svg`" size="lg"></q-icon>
+          {{a.name}}</q-btn>
+              </q-card-section>
             </div>
-          </template>
-        </q-btn>
-      </div>
-    </div>
-
-    <span v-if="pos" class="bg-white q-py-sm q-pl-sm" style="display: block; border-left: 6px solid var(--q-primary)">
-      当前定位： {{ pos.province }}{{ pos.city }}{{ pos.district }}{{ pos.township }}
-    </span>
-
-    <div class="row">
-      <q-card flat class="q-ma-sm card row justify-between" style="flex: 1" v-if="weather.value">
-        <div>
-          <div class="text-h4">{{ weather.value.temperature }}℃</div>
-          <div class="text-h6">{{ weather.value.weather }}</div>
-        </div>
-        <q-icon size="xl" :name="`img:/svg/weather/${weather.value.weather}.svg`"></q-icon>
-      </q-card>
-      <q-card style="flex: 1" class="card" v-else>加载中......</q-card>
-      <q-card flat class="card text-h6" style="flex: 1">今日种植小妙招</q-card>
+          </q-page>
+        </q-page-container>
+      </q-layout>
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
 import axios from 'axios';
 import { ref, reactive } from 'vue';
@@ -52,12 +59,12 @@ const router = useRouter();
 const search = ref('');
 const $q = useQuasar();
 const menu = ref([
-  { name: '土壤检测', icon: 'sensors', color: '#5C8BD9', to: '/home/test' },
-  { name: '作物推荐', icon: 'eco', color: '#F2C037', to: '/home/test' },
-  { name: '种子购买', icon: 'shopping_cart', color: '#9C4DCC', to: '/shop?type=seed' },
-  { name: '专家咨询', icon: 'person', color: '#E57373', to: '/chat' },
-  { name: '种植技术', icon: 'compost', color: '#66BB6A', to: '/home/test' },
-  { name: '机械招募', icon: 'settings_suggest', color: '#616161', to: '/home/test' },
+  { name: '土壤检测', color: '#5C8BD9', to: '/home/test' },
+  { name: '作物推荐', color: '#F2C037', to: '/home/test' },
+  { name: '种子购买', color: '#9C4DCC', to: '/shop?type=seed' },
+  { name: '专家咨询', color: '#E57373', to: '/chat' },
+  { name: '种植技术', color: '#66BB6A', to: '/home/test' },
+  { name: '机械招募', color: '#616161', to: '/home/test' },
 ]);
 let pos = reactive<Position>({
   adcode: 0,
@@ -109,34 +116,27 @@ const getLocation = async () => {
 };
 getLocation();
 </script>
-<style scoped lang="scss">
-.bg {
-  background: #e7e7e7;
+<style>
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
-.grid {
-  display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  grid-template-columns: repeat(3, 1fr);
-  justify-items: center;
+.q-card-section {
+  height: 100%;
 }
 
-.card {
-  background: #fff;
+.q-btn {
+  margin-right: 10px;
+}
+
+.full-height {
+  height: 100%;
+}
+.card{
   border-radius: 10px;
-  margin: 10px;
-  padding: 10px;
-}
-
-header {
-  .q-toolbar label {
-    width: 100%;
-  }
-}
-
-.grid-item {
-  width: 70%;
-  height: 70%;
-  flex-wrap: nowrap;
+  background-color: white;
+  box-shadow: 0 2px 5px 0 rgba(5, 5, 5, 0.2);
 }
 </style>
