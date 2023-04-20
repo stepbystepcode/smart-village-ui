@@ -2,33 +2,33 @@
   <div class="container" >
     <div class="top-section"></div>
     <div class="bottom-section">
-      <q-layout view="hHh lpR fFf" v-if="weather.value">
+      <q-layout view="hHh lpR fFf">
         <q-header  class="bg-green "
           style="height: 25%;">
-          <div class="q-pa-lg">
-            <div class="text-h5">上午好</div>
+          <div class="q-pa-lg" style="position: relative;top: 20px">
+            <div class="text-h4">上午好</div>
             <div class="q-mb-sm">欢迎使用智慧农庄</div>
           </div>
-          <div class="q-pa-sm" style="position: absolute; right: 0; top: 0; bottom: 0;">
-        <q-icon size="xl" class="full-height"  :name="`img:/svg/weather/${weather.value.weather}.svg`"></q-icon>
+          <div class="q-pa-sm" v-if="weather.value" style="position: absolute; right: 0; top: 0; bottom: 0;">
+        <q-icon size="150px" class="full-height" style="position: relative;top:-50px;right: -40px" :name="`img:/svg/weather/${weather.value.weather}.svg`"></q-icon>
           </div>
-          <div class="q-pa-sm">
+          <div class="q-pa-sm" v-if="weather.value&&pos">
             <q-card-section style="display: grid; grid-template-columns: repeat(4, 1fr);">
               <div class="column flex-center">
-                <q-icon name="folder" size="30px" />
-                <div>Folder 1</div>
+                <q-icon name="pin_drop" size="30px" />
+                <div>{{pos.city}}</div>
               </div>
               <div class="column flex-center">
-                <q-icon name="folder" size="30px" />
-                <div>Folder 2</div>
+                <q-icon name="thermostat" size="30px" />
+                <div>{{weather.value.temperature}}℃</div>
               </div>
               <div class="column flex-center">
-                <q-icon name="folder" size="30px" />
-                <div>Folder 3</div>
+                <q-icon name="air" size="30px" />
+                <div>{{weather.value.winddirection}}风{{weather.value.windpower}}</div>
               </div>
               <div class="column flex-center">
-                <q-icon name="folder" size="30px" />
-                <div>Folder 4</div>
+                <q-icon name="water" size="30px" />
+                <div>{{weather.value.humidity}}</div>
               </div>
             </q-card-section>
           </div>
@@ -40,7 +40,10 @@
               <q-card-section
                 style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);">
         <q-btn v-for="(a, i) in menu" :key="i" class="q-pa-md q-ma-sm card" flat :to="a.to">
-          <q-icon :name="`img:/svg/home/${i+1}.svg`" size="lg"></q-icon>
+          <q-icon :name="`img:/svg/home/${i+1}.svg`" class="q-mb-sm" size="lg">
+
+            <span :style="`position: absolute;top: -4px;left:-4px;right:-4px;bottom: -4px;filter: opacity(0.5);background-color: ${a.color};z-index:-100;border-radius: 50%`"></span>
+          </q-icon>
           {{a.name}}</q-btn>
               </q-card-section>
             </div>
@@ -59,12 +62,12 @@ const router = useRouter();
 const search = ref('');
 const $q = useQuasar();
 const menu = ref([
-  { name: '土壤检测', color: '#5C8BD9', to: '/home/test' },
-  { name: '作物推荐', color: '#F2C037', to: '/home/test' },
-  { name: '种子购买', color: '#9C4DCC', to: '/shop?type=seed' },
-  { name: '专家咨询', color: '#E57373', to: '/chat' },
-  { name: '种植技术', color: '#66BB6A', to: '/home/test' },
-  { name: '机械招募', color: '#616161', to: '/home/test' },
+  { name: '土壤检测', color: '#bdc8d0', to: '/home/test' },
+  { name: '作物推荐', color: '#dabc85', to: '/home/test' },
+  { name: '种子购买', color: '#d9a59e', to: '/shop?type=seed' },
+  { name: '专家咨询', color: '#b7b7b7', to: '/chat' },
+  { name: '种植技术', color: '#9ad9ad', to: '/home/test' },
+  { name: '机械招募', color: '#e7c179', to: '/home/test' },
 ]);
 let pos = reactive<Position>({
   adcode: 0,
