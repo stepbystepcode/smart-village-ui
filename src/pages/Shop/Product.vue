@@ -43,7 +43,7 @@ import axios from 'axios'
 const route = useRoute()
 const favourite = () => {
 axios.get(
-  `http://8.130.69.208:8080/api/data/${route.params.type}/${route.params.id[0]}?type=favourite`,{
+  `http://8.130.101.128:8080/api/data/${route.params.type}/${route.params.id[0]}?type=favourite`,{
   headers: {
     'Content-Type': 'application/json','Authorization': `Bearer ${localStorage.getItem('auth')}`
   }
@@ -57,7 +57,7 @@ if (localStorage.getItem('auth')) {
 }
 
 const response = await axios.get(
-  `http://8.130.69.208:8080/api/data/${route.params.type}/${route.params.id[0]}`,{
+  `http://8.130.101.128:8080/api/data/${route.params.type}/${route.params.id[0]}`,{
     headers: headers
   }
 );

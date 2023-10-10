@@ -37,8 +37,8 @@ const router = useRouter()
 const route = useRoute()
 const headers = { Authorization: `Bearer ${localStorage.getItem('auth')}` };
 const { data:goods } = await axios.get(
-  `http://8.130.69.208:8080/api/data/goods/`,{ headers });
-const apiUrl = 'http://8.130.69.208:8080/api/user/item/?type=' + route.query.type;
+  `http://8.130.101.128:8080/api/data/goods/`,{ headers });
+const apiUrl = 'http://8.130.101.128:8080/api/user/item/?type=' + route.query.type;
 const response = await axios.get(apiUrl, { headers });
 const data = response.data.reverse();
   // Do something with reversed data

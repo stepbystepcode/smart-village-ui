@@ -53,7 +53,7 @@ const submit=()=>{
   };
   (async () => {
   try {
-    const response = await axios.post('http://8.130.69.208:8080/api/signup',json);
+    const response = await axios.post('http://8.130.101.128:8080/api/signup',json);
     $q.notify({
       color: 'green-4',
       textColor: 'white',

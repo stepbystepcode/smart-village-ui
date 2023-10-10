@@ -47,7 +47,7 @@ if (localStorage.getItem('auth')!=null) {
   const tokenParts = localStorage.getItem('auth')!.split('.');
   const username = JSON.parse(atob(tokenParts[1])).sub;
   isLogin.value=username
-  //axios.post(`http://8.130.69.208:8080/api/user/${username}`,null,
+  //axios.post(`http://8.130.101.128:8080/api/user/${username}`,null,
   //{headers: {Authorization: `Bearer ${localStorage.getItem('auth')}`}
   //});
 }
