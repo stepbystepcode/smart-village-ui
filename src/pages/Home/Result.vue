@@ -1,11 +1,11 @@
 <template>
-  <div class="container q-pt-xl" v-if="data">
+  <div class="container q-pt-xl" v-if="route.params.type">
     <div class="card">
-      <div class="title q-mb-lg">土壤类型:{{ type[data.value].name }}</div>
+      <div class="title q-mb-lg">土壤类型:{{ type[route.params.type].name }}</div>
       <div class="list">
-        <div v-for="a in type[data.value].crop" :key="a" class="list-item">{{ a }}</div>
+        <div v-for="a in type[route.params.type].crop" :key="a" class="list-item">{{ a }}</div>
       </div>
-      <p class="description">{{ type[data.value].description }}</p>
+      <p class="description">{{ type[route.params.type].description }}</p>
     </div>
   </div>
   <div v-else>loading...</div>
@@ -59,12 +59,8 @@
 </style>
 
 <script setup>
-import { reactive, onMounted } from 'vue';
-import axios from 'axios'
-
-const data = reactive({
-  value: ''
-});
+import {useRoute} from 'vue-router'
+const route=useRoute();
 const type=[
   {
     'name': '初育土',
@@ -82,7 +78,5 @@ const type=[
     'description': '褐土是一类发育程度较高的温带土壤类型,主要分布于温带大陆性气候区域的平原和丘陵地带。其特征是土层深厚、肥力较高、通气透水性良好。是农业大生产的主要土壤类型之一,适宜多种作物种植,如小麦、玉米、高粱、大豆等。但长期过度开垦可导致褐土肥力下降,需要进行有机肥还田、措施提高土壤质量。'
   }
 ]
-onMounted(() => {
-});
 </script>
 

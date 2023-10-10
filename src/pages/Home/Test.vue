@@ -21,6 +21,7 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router'
 import BackBtn from '../../components/BackBtn.vue'
+import axios from 'axios';
 const router = useRouter();
 const video = ref(null);
 const dialogVisible = ref(false);
@@ -28,21 +29,32 @@ const photoDataUrl = ref(null);
 
 onMounted(() => {
   navigator.mediaDevices
-    .getUserMedia({ video: { facingMode: "environment" } })
+    .getUserMedia({ video: { facingMode: 'environment' } })
     .then((stream) => (video.value.srcObject = stream));
 });
+const result=ref('');
 
 function takePhoto() {
-  const canvas = document.createElement("canvas");
+  const canvas = document.createElement('canvas');
   canvas.width = video.value.videoWidth;
   canvas.height = video.value.videoHeight;
-  canvas.getContext("2d").drawImage(video.value, 0, 0);
+  canvas.getContext('2d').drawImage(video.value, 0, 0);
 
   const img = new Image();
-  img.src = canvas.toDataURL("image/png");
+  img.src = canvas.toDataURL('image/jpeg');
 
   photoDataUrl.value = img.src;
   dialogVisible.value = true;
+
+}
+async function uploadPhoto() {
+  const blob = await (await fetch(photoDataUrl.value)).blob();
+  const file = new File([blob], 'image.jpg', {type: 'image/jpeg'});
+  const formData = new FormData();
+  formData.append('image', file);
+  await axios.post('http://8.130.101.128:8081/api/pic', formData, {
+    headers: {'Content-Type': 'multipart/form-data'}
+  }).then(res=>{result.value=res.data.value;router.push(`/home/result/${result.value}`);});
 }
 
 function closeDialog() {
@@ -51,8 +63,9 @@ function closeDialog() {
 
 function submitPhoto() {
   // Do something with the photo here, such as uploading it to a server
+  uploadPhoto();
   dialogVisible.value = false;
-  router.push('/home/result');
+
 }
 </script>
 
